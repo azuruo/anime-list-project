@@ -1,5 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/auth/google');
+}
+
+router.get('/profile', ensureAuthenticated, (req, res) => {
+  res.render('profile', { user: req.user });
+});
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
