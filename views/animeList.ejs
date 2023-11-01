@@ -9,7 +9,14 @@
       <% animeList.forEach(function(anime) { %>
       <li>
         <%= anime.title %> - <%= anime.genre.join(', ') %>
-        <!-- Add buttons/links for Edit and Delete here -->
+        <a href="/anime/<%= anime._id %>/edit">Edit</a>
+        <form
+          action="/anime/<%= anime._id %>"
+          method="POST"
+          style="display: inline"
+        >
+          <button type="submit">Delete</button>
+        </form>
       </li>
       <% }); %>
     </ul>
