@@ -9,9 +9,13 @@
     <a href="/auth/logout">Logout</a>
     <h2>Your Anime List:</h2>
     <ul>
-      <% user.animeList.forEach(function(anime) { %>
-      <li><%= anime.title %></li>
-      <% }); %>
+      <% if(user.animeList && user.animeList.length > 0) { %>
+        <% user.animeList.forEach(function(anime) { %>
+          <li><%= anime.title %></li>
+        <% }); %>
+      <% } else { %>
+        <p>You have no anime in your list yet.</p>
+      <% } %>
     </ul>
   </body>
 </html>

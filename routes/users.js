@@ -9,12 +9,18 @@ function ensureAuthenticated(req, res, next) {
 }
 
 router.get('/profile', ensureAuthenticated, (req, res) => {
-  res.render('profile', { user: req.user });
+  res.render('profile', {
+      user: req.user
+  });
 });
-
-
+router.get('/register', (req, res) => {
+  res.render('register');
+});
+router.get('/login', (req, res) => {
+  res.render('login');
+});
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
