@@ -9,7 +9,7 @@ const AnimeSchema = new Schema({
   genre: [String],
   description: String,
   rating: Number,
-  userId: {
+  _user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   }

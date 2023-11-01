@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Anime List</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-<body>
-  <header>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <header>
       <nav>
-          <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/search">Search</a></li>
-              <li><a href="/users/profile">Profile</a></li>
-          </ul>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <form action="/users/search" method="GET">
+            <input type="text" name="query" placeholder="Search for anime" />
+            <button type="submit">Search</button>
+          </form>
+          <% if (!user) { %>
+          <a href="/auth/google" class="login-btn">Log in with Google</a>
+          <% } else { %>
+          <a href="/users/profile" class="profile-btn">Profile</a>
+          <% } %>
+        </ul>
       </nav>
-  </header>
-  <h1>Welcome to Anime List!</h1>
-  <p>Keep track of your favorite anime and share your thoughts with others.</p>
-</body>
+    </header>
+    <h1>Welcome to Anime List!</h1>
+    <p>
+      Keep track of your favorite anime and share your thoughts with others.
+    </p>
+  </body>
 </html>

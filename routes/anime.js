@@ -69,5 +69,11 @@ router.delete('/:animeId', ensureAuthenticated, async (req, res) => {
     res.json({ message: err.message });
   }
 });
+// Search an Anime
+router.get('/search', async (req, res) => {
+  const query = req.query.q;
+  const animeList = await Anime.find({ title: new RegExp(query, 'i') });
+  res.render('search', { animeList, query });
+});
 
 module.exports = router;
