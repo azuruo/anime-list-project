@@ -9,6 +9,7 @@ const expressSession = require('express-session');
 require('dotenv').config();
 require('./config/database');
 require('./config/passport-setup');
+const animeRouter = require('./routes/anime');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -44,6 +45,7 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRoutes);
+app.use('/anime', animeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

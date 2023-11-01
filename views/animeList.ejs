@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Anime List</title>
+</head>
+<body>
+  <h1>Anime List</h1>
+  <ul>
+    <% animeList.forEach(function(anime) { %>
+      <li>
+        <%= anime.title %> - <%= anime.genre.join(', ') %>
+        <!-- Add buttons/links for Edit and Delete here -->
+      </li>
+    <% }); %>
+  </ul>
+  <!-- Add a form to create a new anime entry here -->
+</body>
+</html>
