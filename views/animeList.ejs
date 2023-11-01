@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Anime List</title>
-</head>
-<body>
-  <h1>Anime List</h1>
-  <ul>
-    <% animeList.forEach(function(anime) { %>
+  <head>
+    <title>Anime List</title>
+  </head>
+  <body>
+    <h1>Anime List</h1>
+    <ul>
+      <% animeList.forEach(function(anime) { %>
       <li>
         <%= anime.title %> - <%= anime.genre.join(', ') %>
         <!-- Add buttons/links for Edit and Delete here -->
       </li>
-    <% }); %>
-  </ul>
-  <!-- Add a form to create a new anime entry here -->
-</body>
+      <% }); %>
+    </ul>
+    <form action="/anime" method="POST">
+      <label>Title: <input type="text" name="title" required /></label><br />
+      <label>Genre: <input type="text" name="genre" required /></label><br />
+      <label>Description: <textarea name="description"></textarea></label><br />
+      <label>Rating: <input type="number" name="rating" /></label><br />
+      <button type="submit">Add Anime</button>
+    </form>
+  </body>
 </html>
