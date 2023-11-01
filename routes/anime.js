@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Anime = require('../models/anime');
 
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
 // GET: Fetch all anime
 router.get('/', async (req, res) => {
   try {
@@ -13,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST: Create a new anime
-router.post('/', async (req, res) => {
+router.post('/', ensureAuthenticated, async (req, res) => {
   const anime = new Anime({
     title: req.body.title,
     genre: req.body.genre,
@@ -41,7 +48,7 @@ router.get('/:animeId', async (req, res) => {
 });
 
 // PATCH: Update an anime by ID
-router.patch('/:animeId', async (req, res) => {
+router.patch('/:animeId', ensureAuthenticated, async (req, res) => {
   try {
     const updatedAnime = await Anime.updateOne(
       { _id: req.params.animeId },
@@ -54,7 +61,7 @@ router.patch('/:animeId', async (req, res) => {
 });
 
 // DELETE: Delete an anime by ID
-router.delete('/:animeId', async (req, res) => {
+router.delete('/:animeId', ensureAuthenticated, async (req, res) => {
   try {
     const removedAnime = await Anime.remove({ _id: req.params.animeId });
     res.json(removedAnime);
