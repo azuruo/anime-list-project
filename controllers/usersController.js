@@ -24,8 +24,9 @@ exports.profile = async (req, res) => {
 exports.searchAnime = async (req, res) => {
   try {
     const searchQuery = req.query.query;
+    const message = req.query.message;
     const results = await Anime.find({ title: new RegExp(searchQuery, 'i') });
-    res.render('searchResults', { animeList: results });
+    res.render('searchResults', { animeList: results, message: message });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

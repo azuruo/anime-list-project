@@ -64,30 +64,31 @@ exports.deleteAnime = async (req, res) => {
 };
 
 exports.addToMyList = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    try {
+      const user = await User.findById(req.user.id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      const anime = await Anime.findById(req.params.animeId);
+      if (!anime) {
+        return res.status(404).json({ message: "Anime not found" });
+      }
+      
+      if (user.animeList && user.animeList.includes(req.params.animeId)) {
+        return res.redirect(`/users/search?query=${req.query.query}&message=Anime already in your list`);
     }
-    
-    const anime = await Anime.findById(req.params.animeId);
-    if (!anime) {
-      return res.status(404).json({ message: "Anime not found" });
+      
+      user.animeList = user.animeList || [];
+      user.animeList.push(anime.id);
+      await user.save();
+  
+      res.redirect(`/users/search?query=${req.query.query}&message=Anime added successfully!`);
+      
+    } catch (err) {
+      res.status(500).json({ message: err.message });
     }
-    
-    if (user.animeList && user.animeList.includes(req.params.animeId)) {
-      return res.status(400).json({ message: "Anime already in your list" });
-    }
-    
-    user.animeList = user.animeList || [];
-    user.animeList.push(anime.id);
-    await user.save();
-    
-    res.status(200).json({ message: "Anime added to your list" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
+  };
 
 exports.removeFromMyList = async (req, res) => {
     try {
