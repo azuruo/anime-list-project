@@ -6,16 +6,20 @@
   <body>
     <h1>Welcome, <%= user.username %></h1>
     <p>Email: <%= user.email %></p>
+    <a href="/">Home</a>
     <a href="/auth/logout">Logout</a>
     <h2>Your Anime List:</h2>
     <ul>
       <% if(animeList && animeList.length > 0) { %>
         <% animeList.forEach(function(anime) { %>
-          <li><%= anime.title %></li>
+          <li><%= anime.title %>
+            <button class="removeAnimeButton" data-animeid="<%= anime._id %>">Remove</button>
+          </li>
         <% }); %>
       <% } else { %>
         <p>You have no anime in your list yet.</p>
       <% } %>
     </ul>
+    <script src="/js/frontend.js"></script>
   </body>
 </html>
