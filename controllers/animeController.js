@@ -21,10 +21,10 @@ exports.createAnime = async (req, res) => {
 
   try {
     const savedAnime = await anime.save();
-    res.status(201).json(savedAnime);
-  } catch (err) {
+    res.redirect('/users/search?message=Anime created successfully!');
+} catch (err) {
     res.status(500).json({ message: err.message });
-  }
+}
 };
 
 exports.getAnimeById = async (req, res) => {
@@ -52,15 +52,12 @@ exports.updateAnime = async (req, res) => {
 };
 
 exports.deleteAnime = async (req, res) => {
-  try {
-    const removedAnime = await Anime.deleteOne({ _id: req.params.animeId });
-    if (removedAnime.deletedCount === 0) {
-      return res.status(404).json({ message: "Anime not found" });
+    try {
+        await Anime.findByIdAndDelete(req.params.animeId);
+        res.redirect('/users/search?message=Anime removed successfully!');
+    } catch (err) {
+        res.status(500).send(err.message);
     }
-    res.status(200).json(removedAnime);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
 };
 
 exports.addToMyList = async (req, res) => {

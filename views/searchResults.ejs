@@ -1,26 +1,52 @@
 <!DOCTYPE html>
+
 <html>
-  <body>
+
+<body>
+  <div class="links">
+    <a href="/">Home</a>
+    <a href="/users/search">Show All Anime</a>
+    <a href="/users/profile">User Profile</a>
+</div>
+    <form action="/anime" method="post">
+        <label for="title">Title:</label>
+        <input type="text" name="title" required>
+
+        <label for="genre">Genre:</label>
+        <input type="text" name="genre" required>
+
+        <label for="description">Description:</label>
+        <textarea name="description" required></textarea>
+
+        <label for="rating">Rating:</label>
+        <input type="number" name="rating" min="1" max="10" required>
+
+        <button type="submit">Create Anime</button>
+    </form>
+
     <% if (typeof message !== 'undefined' && message) { %>
     <div class="alert"><%= message %></div>
-    <% } %> <% animeList.forEach(anime => { %>
+    <% } %>
+
+    <% animeList.forEach(anime => { %>
     <div>
-      <h3><%= anime.title %></h3>
-      <p><%= anime.description %></p>
-      <form action="/anime/add-to-my-list/<%= anime._id %>" method="post">
-        <button type="submit">Add to my list</button>
-      </form>
+        <h3><%= anime.title %></h3>
+        <p><%= anime.description %></p>
+        <p><%= anime.genre %></p>
+        <p><%= anime.rating %></p>
+        <div class="anime-actions">
+            <form action="/anime/add-to-my-list/<%= anime._id %>" method="post">
+                <button type="submit">Add to my list</button>
+            </form>
+            <form action="/anime/delete/<%= anime._id %>" method="post" onsubmit="return confirmDeletion();">
+              <button type="submit">Remove from Database</button>
+          </form>
+          
+        </div>
     </div>
     <% }); %>
 
-    <div class="links">
-      <a href="/">Home</a>
-
-      <a href="/users/search">Show All Anime</a>
-
-      <a href="/users/profile">User Profile</a>
-    </div>
-
     <script src="/js/frontend.js"></script>
-  </body>
+</body>
+
 </html>

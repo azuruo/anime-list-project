@@ -63,6 +63,10 @@ function addAnime(event) {
   });
 }
 
+function confirmDeletion() {
+  return confirm('Are you sure you want to remove this anime from the database?');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const removeButtons = document.querySelectorAll('.removeAnimeButton');
   removeButtons.forEach((button) => {

@@ -13,7 +13,7 @@ router.get('/', animeController.getAllAnime);
 router.post('/', ensureAuthenticated, animeController.createAnime);
 router.get('/:animeId', animeController.getAnimeById);
 router.patch('/:animeId', ensureAuthenticated, animeController.updateAnime);
-router.delete('/:animeId', ensureAuthenticated, animeController.deleteAnime);
+router.post('/delete/:animeId', ensureAuthenticated, animeController.deleteAnime);
 router.post('/add-to-my-list/:animeId', ensureAuthenticated, animeController.addToMyList);
 router.delete('/remove-from-my-list/:animeId', ensureAuthenticated, animeController.removeFromMyList);
 
