@@ -9,8 +9,8 @@
     <a href="/auth/logout">Logout</a>
     <h2>Your Anime List:</h2>
     <ul>
-      <% if(user.animeList && user.animeList.length > 0) { %>
-        <% user.animeList.forEach(function(anime) { %>
+      <% if(animeList && animeList.length > 0) { %>
+        <% animeList.forEach(function(anime) { %>
           <li><%= anime.title %></li>
         <% }); %>
       <% } else { %>

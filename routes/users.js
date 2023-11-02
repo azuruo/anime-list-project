@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const User = require('../models/user');
 const Anime = require('../models/anime');
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -16,7 +16,8 @@ router.get('/', function (req, res, next) {
   });
 });
 router.get('/profile', ensureAuthenticated, async (req, res) => {
-  const animeList = await Anime.find({ userId: req.user.id });
+  const user = await User.findById(req.user.id);
+  const animeList = user.animeList ? await Anime.find({ _id: { $in: user.animeList } }) : [];
   res.render('profile', {
     user: req.user,
     animeList,
@@ -29,7 +30,7 @@ router.get('/search', async (req, res) => {
   // Use a regex for a case-insensitive and partial match search
   const results = await Anime.find({ title: new RegExp(searchQuery, 'i') });
 
-  res.render('searchResults', { results }); // Render a view with the results or send the results as needed
+  res.render('searchResults', { animeList: results }) // Render a view with the results or send the results as needed
 });
 
 module.exports = router;

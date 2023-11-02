@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Anime = require('../models/anime');
+const User = require('../models/user');
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -67,6 +68,31 @@ router.delete('/:animeId', ensureAuthenticated, async (req, res) => {
     res.json(removedAnime);
   } catch (err) {
     res.json({ message: err.message });
+  }
+});
+router.post('/add-to-my-list/:animeId', ensureAuthenticated, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    const anime = await Anime.findById(req.params.animeId);
+    if (!anime) {
+      return res.status(404).json({ message: "Anime not found" });
+    }
+    
+    if (user.animeList && user.animeList.includes(req.params.animeId)) {
+      return res.status(400).json({ message: "Anime already in your list" });
+    }
+    
+    user.animeList = user.animeList || [];
+    user.animeList.push(anime.id);
+    await user.save();
+
+    res.json({ message: "Anime added to your list" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 // Search an Anime
