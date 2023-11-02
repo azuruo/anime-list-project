@@ -34,28 +34,38 @@
         <p><%= anime.description %></p>
         <p><%= anime.genre %></p>
         <p><%= anime.rating %></p>
-      <% anime.comments.forEach(comment => { %>
+
+        <% anime.comments.forEach(comment => { %>
         <div class="comment">
             <% if (comment.userProfilePicture) { %>
                 <img src="<%= comment.userProfilePicture %>" alt="<%= comment.userName %>'s profile picture" class="comment-profile-pic">
             <% } %>
             <strong><%= comment.userName %></strong>
             <p><%= comment.text %></p>
+
+            <!-- DELETE COMMENT BUTTON -->
+            <% if (user && user._id && comment.userId && user._id.toString() === comment.userId.toString()) { %>
+                <form action="/anime/<%= anime._id %>/comment/<%= comment._id %>/delete" method="post">
+                    <button type="submit">Delete Comment</button>
+                </form>
+            <% } %>
+
         </div>
-    <% }); %>
-      <!-- Form to add a new comment -->
-      <form action="/anime/<%= anime._id %>/comment" method="post">
-          <textarea name="commentText" required></textarea>
-          <button type="submit">Add Comment</button>
-      </form>
+        <% }); %>
+
+        <!-- Form to add a new comment -->
+        <form action="/anime/<%= anime._id %>/comment" method="post">
+            <textarea name="commentText" required></textarea>
+            <button type="submit">Add Comment</button>
+        </form>
+
         <div class="anime-actions">
             <form action="/anime/add-to-my-list/<%= anime._id %>" method="post">
                 <button type="submit">Add to my list</button>
             </form>
             <form action="/anime/delete/<%= anime._id %>" method="post" onsubmit="return confirmDeletion();">
-              <button type="submit">Remove from Database</button>
-          </form>
-          
+                <button type="submit">Remove from Database</button>
+            </form>
         </div>
     </div>
     <% }); %>
