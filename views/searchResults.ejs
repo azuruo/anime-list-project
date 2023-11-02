@@ -34,6 +34,20 @@
         <p><%= anime.description %></p>
         <p><%= anime.genre %></p>
         <p><%= anime.rating %></p>
+      <% anime.comments.forEach(comment => { %>
+        <div class="comment">
+            <% if (comment.userProfilePicture) { %>
+                <img src="<%= comment.userProfilePicture %>" alt="<%= comment.userName %>'s profile picture" class="comment-profile-pic">
+            <% } %>
+            <strong><%= comment.userName %></strong>
+            <p><%= comment.text %></p>
+        </div>
+    <% }); %>
+      <!-- Form to add a new comment -->
+      <form action="/anime/<%= anime._id %>/comment" method="post">
+          <textarea name="commentText" required></textarea>
+          <button type="submit">Add Comment</button>
+      </form>
         <div class="anime-actions">
             <form action="/anime/add-to-my-list/<%= anime._id %>" method="post">
                 <button type="submit">Add to my list</button>

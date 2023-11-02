@@ -108,3 +108,38 @@ exports.removeFromMyList = async (req, res) => {
     }
 };
 
+exports.addComment = async (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.status(403).json({ message: 'You must be logged in to add comments.' });
+    }
+    try {
+        const anime = await Anime.findById(req.params.animeId);
+        const user = await User.findById(req.user.id);
+        const comment = {
+            text: req.body.commentText,
+            userId: user._id,
+            userName: user.name,
+            userProfilePicture: user.profilePicture,
+            date: new Date(),
+        };
+        anime.comments.push(comment);
+        await anime.save();
+        res.redirect('/users/search');
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+exports.deleteComment = async (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.status(403).json({ message: 'You must be logged in to delete comments.' });
+    }
+    try {
+        const anime = await Anime.findById(req.params.animeId);
+        anime.comments = anime.comments.filter(comment => comment._id.toString() !== req.params.commentId || comment.userId.toString() !== req.user._id.toString());
+        await anime.save();
+        res.redirect('/users/search');
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
