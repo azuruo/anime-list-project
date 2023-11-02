@@ -10,12 +10,14 @@
         <ul>
           <li><a href="/">Home</a></li>
           <form action="/users/search" method="GET">
-        <a href="/users/search" class="show-anime-btn">Show All Anime</a>
+            <a href="/users/search" class="show-anime-btn">Show All Anime</a>
           </form>
           <% if (!user) { %>
-          <a href="/auth/google" class="login-btn">Log in with Google</a>
-          <% } else { %>
-          <a href="/users/profile" class="profile-btn">Profile</a>
+            <a href="/auth/google" class="login-btn">Log in with Google</a>
+          <% } %>
+          <% if (user) { %>
+            <a href="/users/profile" class="profile-btn">Profile</a>
+            <a href="/auth/logout">Logout</a>
           <% } %>
         </ul>
       </nav>
