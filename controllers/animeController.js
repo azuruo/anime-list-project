@@ -110,8 +110,3 @@ exports.removeFromMyList = async (req, res) => {
     }
 };
 
-exports.searchAnime = async (req, res) => {
-  const query = req.query.q;
-  const animeList = await Anime.find({ title: new RegExp(query, 'i') });
-  res.status(200).render('search', { animeList, query });
-};

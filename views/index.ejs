@@ -10,8 +10,7 @@
         <ul>
           <li><a href="/">Home</a></li>
           <form action="/users/search" method="GET">
-            <input type="text" name="query" placeholder="Search for anime" />
-            <button type="submit">Search</button>
+        <a href="/users/search" class="show-anime-btn">Show All Anime</a>
           </form>
           <% if (!user) { %>
           <a href="/auth/google" class="login-btn">Log in with Google</a>

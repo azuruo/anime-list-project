@@ -16,6 +16,5 @@ router.patch('/:animeId', ensureAuthenticated, animeController.updateAnime);
 router.delete('/:animeId', ensureAuthenticated, animeController.deleteAnime);
 router.post('/add-to-my-list/:animeId', ensureAuthenticated, animeController.addToMyList);
 router.delete('/remove-from-my-list/:animeId', ensureAuthenticated, animeController.removeFromMyList);
-router.get('/search', animeController.searchAnime);
 
 module.exports = router;
