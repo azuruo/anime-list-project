@@ -13,7 +13,7 @@ function removeAnime(event) {
   const animeId = event.target.getAttribute('data-animeid');
 
   fetch(`/anime/remove-from-my-list/${animeId}`, {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
           'Content-Type': 'application/json',
       },

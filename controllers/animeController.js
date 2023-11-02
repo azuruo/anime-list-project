@@ -90,23 +90,24 @@ exports.addToMyList = async (req, res) => {
 };
 
 exports.removeFromMyList = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    try {
+        const user = await User.findById(req.user.id);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        if (!user.animeList.includes(req.params.animeId)) {
+            return res.status(400).json({ message: "Anime not in your list" });
+        }
+
+        // Filter out the anime to remove it from the list
+        user.animeList = user.animeList.filter(animeId => animeId.toString() !== req.params.animeId);
+        await user.save();
+
+        res.status(200).json({ message: "Anime removed from your list" });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
-
-    if (!user.animeList.includes(req.params.animeId)) {
-      return res.status(400).json({ message: "Anime not in your list" });
-    }
-
-    user.animeList = user.animeList.filter(animeId => animeId.toString() !== req.params.animeId);
-    await user.save();
-
-    res.status(200).json({ message: "Anime removed from your list" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
 };
 
 exports.searchAnime = async (req, res) => {
