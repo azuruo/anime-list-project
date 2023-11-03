@@ -44,11 +44,11 @@
             <p><%= comment.text %></p>
 
             <!-- DELETE COMMENT BUTTON -->
-            <% if (user && user._id && comment.userId && user._id.toString() === comment.userId.toString()) { %>
-                <form action="/anime/<%= anime._id %>/comment/<%= comment._id %>/delete" method="post">
-                    <button type="submit">Delete Comment</button>
-                </form>
-            <% } %>
+            <% if (user && user._id && comment._user && user._id.toString() === comment._user.toString()) { %>
+              <form action="/anime/<%= anime._id %>/comment/<%= comment._id %>/delete" method="post">
+                  <button type="submit">Delete Comment</button>
+              </form>
+          <% } %>
 
         </div>
         <% }); %>

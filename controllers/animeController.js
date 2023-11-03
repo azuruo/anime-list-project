@@ -124,7 +124,7 @@ exports.addComment = async (req, res) => {
     const user = await User.findById(req.user.id);
     const comment = {
       text: req.body.commentText,
-      userId: user._id,
+      _user: user._id,
       userName: user.name,
       userProfilePicture: user.profilePicture,
       date: new Date(),
@@ -151,7 +151,7 @@ exports.deleteComment = async (req, res) => {
       (comment) =>
         !(
           comment._id.toString() === req.params.commentId &&
-          comment.userId.toString() === req.user._id.toString()
+          comment._user.toString() === req.user._id.toString()
         )
     );
 
