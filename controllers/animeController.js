@@ -161,3 +161,31 @@ exports.deleteComment = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+exports.editCommentForm = async (req, res) => {
+  try {
+    const anime = await Anime.findById(req.params.animeId);
+    const comment = anime.comments.id(req.params.commentId);
+    if (comment._user.toString() !== req.user._id.toString()) {
+      return res.redirect('/users/search');  // or wherever you want unauthorized users to be redirected
+    }
+    res.render('editComment', { comment, anime });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.updateComment = async (req, res) => {
+  try {
+    const anime = await Anime.findById(req.params.animeId);
+    const comment = anime.comments.id(req.params.commentId);
+    if (comment._user.toString() !== req.user._id.toString()) {
+      return res.redirect('/users/search');  // or wherever you want unauthorized users to be redirected
+    }
+    comment.text = req.body.commentText;  // Assuming the input field's name is 'commentText'
+    await anime.save();
+    res.redirect('/users/search');  // or wherever you want users to be redirected after editing
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

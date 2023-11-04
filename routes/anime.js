@@ -18,5 +18,7 @@ router.post('/add-to-my-list/:animeId', ensureAuthenticated, animeController.add
 router.delete('/remove-from-my-list/:animeId', ensureAuthenticated, animeController.removeFromMyList);
 router.post('/:animeId/comment/:commentId/delete', ensureAuthenticated, animeController.deleteComment);
 router.post('/:animeId/comment', ensureAuthenticated, animeController.addComment);
+router.get('/:animeId/comment/:commentId/edit', ensureAuthenticated, animeController.editCommentForm);
+router.patch('/:animeId/comment/:commentId', ensureAuthenticated, animeController.updateComment);
 
 module.exports = router;

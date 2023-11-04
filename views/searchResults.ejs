@@ -42,7 +42,12 @@
             <% } %>
             <strong><%= comment.userName %></strong>
             <p><%= comment.text %></p>
-
+            <!-- EDIT COMMENT BUTTON -->
+            <% if (user && user._id && comment._user && user._id.toString() === comment._user.toString()) { %>
+                <form action="/anime/<%= anime._id %>/comment/<%= comment._id %>/edit" method="get">
+                  <button type="submit">Edit Comment</button>
+                </form>
+              <% } %>
             <!-- DELETE COMMENT BUTTON -->
             <% if (user && user._id && comment._user && user._id.toString() === comment._user.toString()) { %>
               <form action="/anime/<%= anime._id %>/comment/<%= comment._id %>/delete" method="post">
