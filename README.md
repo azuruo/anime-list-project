@@ -4,11 +4,14 @@ Anime Tracker is an interactive web application designed for anime enthusiasts w
 
 # Screenshot
 
-<img src="/public/images/homepage.png>
+Home Page
+![Homepage Screenshot](/public/images/homepage.png)
 
-<img src="/public/images/database list.png>
+Database of Anime to Choose from
+![Database List Screenshot](/public/images/database_list.png)
 
-<img src="/public/images/anime list.png>
+User Profile featuring list of anime chosen
+![Anime List Screenshot](/public/images/anime_list.png)
 
 # Technologies Used
 
@@ -20,6 +23,9 @@ Anime Tracker is an interactive web application designed for anime enthusiasts w
 - Google OAuth
 
 # Getting Started
+
+Trello Link
+https://trello.com/b/yDxYRWQg/myanimelist-project-clone
 
 Log in with Google
 
