@@ -2,23 +2,31 @@
 <html>
   <head>
     <title>User Profile</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1>Welcome, <%= user.username %></h1>
     <p>Email: <%= user.email %></p>
-    <a href="/">Home</a>
-    <a href="/auth/logout">Logout</a>
+    <p> <%= user.profilepicture %></p>
+    <a href="/" class="home-btn">Home</a>
+    <a href="/auth/logout" class="logout-btn">Logout</a>
     <h2>Your Anime List:</h2>
     <ul>
-      <% if(animeList && animeList.length > 0) { %>
-        <% animeList.forEach(function(anime) { %>
-          <li><%= anime.title %>
-            <button class="removeAnimeButton" data-animeid="<%= anime._id %>">Remove</button>
-          </li>
-        <% }); %>
-      <% } else { %>
-        <p>You have no anime in your list yet.</p>
-      <% } %>
+      <div class="anime-grid">
+        <% if(animeList && animeList.length > 0) { %>
+          <% animeList.forEach(function(anime) { %>
+            <div class="anime-item">
+              <h3><%= anime.title %></h3>
+              <p><%= anime.description %></p>
+              <p>Genre: <%= anime.genre.join(', ') %></p> 
+              <p>Rating: <%= anime.rating %></p>
+              <button class="removeAnimeButton" data-animeid="<%= anime._id %>">Remove</button>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <p>You have no anime in your list yet.</p>
+        <% } %>
+      </div>
     </ul>
     <div id="message" style="display: none; position: fixed; bottom: 10px; right: 10px; background-color: #f44336; color: white; padding: 15px; border-radius: 5px;"></div>
 

@@ -1,8 +1,176 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
 }
 
-a {
-  color: #00B7FF;
+header {
+  background: #333;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  background: #333; /* or any color you want for the navbar background */
+  padding: 0 10px; /* Add padding on the left and right for some spacing */
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center; /* This will vertically center the links */
+  width: 100%;
+}
+
+nav ul li a,
+nav ul li form {
+  text-decoration: none;
+  color: white; /* Color for the text inside links and buttons */
+  padding: 10px 15px; /* Padding for the links and buttons */
+  display: block; /* Make the anchors and form-button fill the li element */
+}
+
+nav a:hover {
+  background-color: #666; /* Darker background on hover */
+}
+
+.login-btn, .profile-btn, .show-anime-btn, .logout-btn, .home-btn{
+  padding: 5px 10px;
+  background: #555;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+}
+
+form {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+button {
+  background: #5cb85c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #4cae4c;
+}
+
+.removeAnimeButton, .removeAnimeDatabaseButton {
+  background: #d9534f;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.removeAnimeButton:hover, .removeAnimeDatabaseButton:hover {
+  background: #c9302c;
+}
+
+.alert {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.comment {
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.comment-profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.anime-actions {
+  margin-top: 10px;
+}
+
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Creates as many columns of min 300px width as can fit in the container */
+  grid-gap: 1rem; /* Adjust the gap between the grid items */
+  padding: 1rem; /* Add some padding around the grid */
+}
+
+.anime-entry {
+  background: #f2f2f2; /* Light grey background for each entry */
+  border: 1px solid #dcdcdc; /* A subtle border for each box */
+  padding: 1rem; /* Spacing inside each box */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds a subtle shadow */
+  margin-bottom: 1rem; /* Space at the bottom of each entry */
+}
+
+@media screen and (max-width: 960px) {
+  .anime-grid {
+    grid-template-columns: repeat(2, 1fr); /* Switches to two columns on medium screens */
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .anime-grid {
+    grid-template-columns: 1fr; /* One column on small screens */
+  }
+}
+
+#animeForm {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-top: 10px;
+  width: auto; /* Adjust width as needed */
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: for better visibility */
+}
+
+/* Optionally, you can add styles for the button if needed */
+#addAnimeButton {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.anime-item {
+  background-color: #fff; /* Or any color of your choice */
+  border: 1px solid #ddd; /* Adds a light border to each item */
+  border-radius: 10px; /* Optional: Rounds the corners of the border */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: Adds a subtle shadow */
 }

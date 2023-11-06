@@ -7,8 +7,6 @@ const CommentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
-  userName: String,
-  userProfilePicture: String,
   date: {
     type: Date,
     default: Date.now

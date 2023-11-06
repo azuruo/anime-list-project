@@ -1,3 +1,7 @@
+<head>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
 <form action="/anime/<%= anime._id %>/comment/<%= comment._id %>" method="post">
     <textarea name="commentText"><%= comment.text %></textarea>
     <button type="submit">Update Comment</button>
